@@ -11,5 +11,6 @@ class getFileView(RenderTemplateView):
 		self.index = request.args.get('index')
 		from run import app
 		files = os.listdir(app.config['UPLOAD_FOLDER'])
+		files.remove(".hidden")
 		fullpath = app.config['UPLOAD_FOLDER'] + "/" + files[int(self.index)]
 		return send_file(fullpath, as_attachment=True)
