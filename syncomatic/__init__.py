@@ -28,3 +28,4 @@ for d in DIRS_IN_PROJECT:
         os.makedirs(d)
 
 import urls
+import models
