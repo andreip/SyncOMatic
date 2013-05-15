@@ -6,9 +6,10 @@
 		{% else %}
 			<title>SyncOMatic</title>
 		{% endif %}
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}"/>
 	</head>
 	<body>
-		<div>Links: <a href="/">Home</a>
+		<div class="nav">Links: <a href="/">Home</a>
 		<a href="/user">User Profile</a>
 		</div>
 		<hr>
