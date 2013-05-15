@@ -1,10 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-        {% if upload_message %}
-            <span>{{ upload_message }}<span>
-        {% endif %}
-        <form action="/" method=post enctype=multipart/form-data>
-            <p><input type=file name=file>
-               <input type=submit value=Upload>
-        </form>
+	{% if upload_message %}
+		<span>{{ upload_message }}<span>
+	{% endif %}
+	<form action="/" method=post enctype=multipart/form-data>
+		<p><input type=file name=file>
+		<input type=submit value=Upload>
+	</form>
+
+	{% for file in files %}
+		<p>{{file}}
+		<form method="get" action="{{url_for('getFile')}}">
+			<input type="hidden" name="index" value={{files.index(file)}} />
+			<button type="submit">Download</button>
+		</form>
+		</p>
+	{% endfor %}
 {% endblock %}

@@ -4,6 +4,7 @@ from flask import request, url_for, render_template
 from werkzeug import secure_filename
 
 from syncomatic.views.render_template import RenderTemplateView
+from syncomatic import app
 
 class RootView(RenderTemplateView):
     methods = ['GET', 'POST']
@@ -18,12 +19,13 @@ class RootView(RenderTemplateView):
             filename.rsplit('.', 1)[1] in self.allowed_extensions
 
     def dispatch_request(self):
-        # If we've got a GET request, just render the template.
+        # If we've got a GET request, just render the template with
+        # all the uploaded files by the user.
         if request.method == 'GET':
-            return super(RootView, self).dispatch_request()
+            files = os.listdir(app.config['UPLOAD_FOLDER'])
+            return super(RootView, self).dispatch_request(files=files)
         # A file upload was done.
         elif request.method == 'POST':
-            from syncomatic import app
             file = request.files['file']
             if file and self.allowed_file(file.filename):
                 filename = secure_filename(file.filename)
@@ -33,4 +35,6 @@ class RootView(RenderTemplateView):
                 upload_message = 'File not provided or not supported format!'
             # Re-render the index page with upload information regarding the
             # uploaded file through POST.
-            return render_template('index.html', upload_message=upload_message)
+            files = os.listdir(app.config['UPLOAD_FOLDER'])
+            return super(RootView, self).dispatch_request(files=files,
+                upload_message=upload_message)
