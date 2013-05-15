@@ -3,7 +3,7 @@ import os
 from flask import request, url_for, render_template
 from werkzeug import secure_filename
 
-from views.render_template import RenderTemplateView
+from syncomatic.views.render_template import RenderTemplateView
 
 class RootView(RenderTemplateView):
     methods = ['GET', 'POST']
@@ -23,7 +23,7 @@ class RootView(RenderTemplateView):
             return super(RootView, self).dispatch_request()
         # A file upload was done.
         elif request.method == 'POST':
-            from run import app
+            from syncomatic import app
             file = request.files['file']
             if file and self.allowed_file(file.filename):
                 filename = secure_filename(file.filename)

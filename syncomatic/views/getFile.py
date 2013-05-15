@@ -11,7 +11,7 @@ class getFileView(View):
     def dispatch_request(self):
         # Get the file index that is wanted to be downloaded.
         index = request.args.get('index')
-        from run import app
+        from syncomatic import app
         files = os.listdir(app.config['UPLOAD_FOLDER'])
         # Target the file one wants to download and send it.
         fullpath = app.config['UPLOAD_FOLDER'] + "/" + files[int(index)]
