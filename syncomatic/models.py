@@ -7,12 +7,13 @@ db.create_all()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
+    password = db.Column(db.String(30), unique=True)
 
-    def __init__(self, username, email):
-        self.username = username
+    def __init__(self, email, password):
         self.email = email
+        # TODO(andreip): hack, save file in plaintext.
+        self.password = password
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<User %r>' % self.email

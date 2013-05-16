@@ -1,10 +1,13 @@
 import os
 
-from flask import request, url_for, render_template, send_file
+from flask import request, url_for, render_template, send_file, redirect
+from flask.ext.login import login_user
 from flask.views import View
+
 from werkzeug import secure_filename
 
 from syncomatic import app
+from syncomatic.models import User
 from syncomatic.forms import LoginForm
 
 class RenderTemplateView(View):
@@ -81,6 +84,9 @@ class LoginView(RenderTemplateView):
 
     def dispatch_request(self):
         form = LoginForm()
+        if form.validate_on_submit():
+            login_user(User.query.all()[0], remember=form.remember_me.data)
+            return redirect(url_for('index'))
         return super(LoginView, self).dispatch_request(title='Sign In',
                                                        form=form)
 
