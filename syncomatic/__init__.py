@@ -1,6 +1,8 @@
 from flask import Flask
 
 app = Flask(__name__)
+# Load config from config.py local file.
+app.config.from_object('syncomatic.config')
 
 # The folder where files will be uploaded.
 import os

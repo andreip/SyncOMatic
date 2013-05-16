@@ -5,6 +5,7 @@ from flask.views import View
 from werkzeug import secure_filename
 
 from syncomatic import app
+from syncomatic.forms import LoginForm
 
 class RenderTemplateView(View):
     """
@@ -70,4 +71,16 @@ class getFileView(View):
         # Target the file one wants to download and send it.
         fullpath = app.config['UPLOAD_FOLDER'] + "/" + files[int(index)]
         return send_file(fullpath, as_attachment=True)
+
+
+class LoginView(RenderTemplateView):
+    methods = ['GET', 'POST']
+
+    def __init__(self, *args, **kwargs):
+        super(LoginView, self).__init__(*args, **kwargs)
+
+    def dispatch_request(self):
+        form = LoginForm()
+        return super(LoginView, self).dispatch_request(title='Sign In',
+                                                       form=form)
 
