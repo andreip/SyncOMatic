@@ -6,7 +6,7 @@ from flask.views import View
 
 from werkzeug import secure_filename
 
-from syncomatic import app
+from syncomatic import app, lm
 from syncomatic.models import User
 from syncomatic.forms import LoginForm
 
@@ -74,6 +74,14 @@ class getFileView(View):
         # Target the file one wants to download and send it.
         fullpath = app.config['UPLOAD_FOLDER'] + "/" + files[int(index)]
         return send_file(fullpath, as_attachment=True)
+
+
+@lm.user_loader
+def load_user(id):
+    """Has the purpose of telling flask-login what to use
+       to load a user from database. Hence the decorator.
+    """
+    return User.query.get(int(id))
 
 
 class LoginView(RenderTemplateView):
