@@ -1,7 +1,7 @@
 import os
 
 from flask import render_template, redirect, url_for, request, g
-from flask.ext.login import login_user, current_user
+from flask.ext.login import login_user, current_user, logout_user
 from flask.views import View
 from werkzeug import secure_filename
 
@@ -113,3 +113,11 @@ class LoginView(RenderTemplateView):
         return super(LoginView, self).dispatch_request(title='Sign In',
                                                        form=form)
 
+
+
+class LogoutView(View):
+    methods = ['GET']
+
+    def dispatch_request(self):
+        logout_user()
+        return redirect(url_for('index'))
