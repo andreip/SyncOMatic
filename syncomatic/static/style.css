@@ -11,3 +11,7 @@ form #login_email {
   margin: 0 auto;
   padding-top: 30px;
 }
+
+.logged_in {
+  float: right;
+}

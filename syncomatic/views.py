@@ -43,7 +43,8 @@ class RootView(RenderTemplateView):
         # all the uploaded files by the user.
         if request.method == 'GET':
             files = os.listdir(app.config['UPLOAD_FOLDER'])
-            return super(RootView, self).dispatch_request(files=files)
+            return super(RootView, self).dispatch_request(files=files,
+                user=g.user)
         # A file upload was done.
         elif request.method == 'POST':
             file = request.files['file']
@@ -57,7 +58,7 @@ class RootView(RenderTemplateView):
             # uploaded file through POST.
             files = os.listdir(app.config['UPLOAD_FOLDER'])
             return super(RootView, self).dispatch_request(files=files,
-                upload_message=upload_message)
+                upload_message=upload_message, user=g.user)
 
 
 class getFileView(View):

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+	<span class="logged_in">Hi, {{user.email}}</span>
 	{% if upload_message %}
 		<span>{{ upload_message }}<span>
 	{% endif %}
