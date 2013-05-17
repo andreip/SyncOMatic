@@ -6,8 +6,9 @@ from flask.views import View
 from werkzeug import secure_filename
 
 from syncomatic import app, lm
-from syncomatic.models import User
+from syncomatic.decorators import login_required
 from syncomatic.forms import LoginForm
+from syncomatic.models import User
 
 class RenderTemplateView(View):
     """
@@ -38,6 +39,7 @@ class RootView(RenderTemplateView):
         return '.' in filename and \
             filename.rsplit('.', 1)[1] in self.allowed_extensions
 
+    @login_required
     def dispatch_request(self):
         # If we've got a GET request, just render the template with
         # all the uploaded files by the user.

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-	<span class="logged_in">Hi, {{user.email}}</span>
+	<span class="logged_in">Hi, <a href='#'>{{user.email}}</a></span>
+
 	{% if upload_message %}
 		<span>{{ upload_message }}<span>
 	{% endif %}
