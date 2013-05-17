@@ -1,9 +1,8 @@
 import os
 
-from flask import request, url_for, render_template, send_file, redirect
-from flask.ext.login import login_user
+from flask import render_template, redirect, url_for, request, g
+from flask.ext.login import login_user, current_user
 from flask.views import View
-
 from werkzeug import secure_filename
 
 from syncomatic import app, lm
@@ -84,6 +83,11 @@ def load_user(id):
     return User.query.get(int(id))
 
 
+@app.before_request
+def before_request():
+    g.user = current_user
+
+
 class LoginView(RenderTemplateView):
     methods = ['GET', 'POST']
 
@@ -92,9 +96,17 @@ class LoginView(RenderTemplateView):
 
     def dispatch_request(self):
         form = LoginForm()
-        if form.validate_on_submit():
-            login_user(User.query.all()[0], remember=form.remember_me.data)
+        # User has logged in successfully before.
+        if g.user is not None and g.user.is_authenticated():
             return redirect(url_for('index'))
+        form = LoginForm()
+        if form.validate_on_submit():
+            user = User.query.filter_by(email = form.email.data).first()
+            # If user exists in our DB, log him in.
+            if user:
+                login_user(user, remember = form.remember_me.data)
+                return redirect(url_for('index'))
+            return redirect(url_for('login'))
         return super(LoginView, self).dispatch_request(title='Sign In',
                                                        form=form)
 
