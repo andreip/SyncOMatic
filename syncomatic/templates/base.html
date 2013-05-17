@@ -9,9 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}"/>
 	</head>
 	<body>
-		<div class="nav">Links: <a href="/">Home</a>
-		<a href="/user">User Profile</a>
-		</div>
+		<div class="nav">Links: <a href="{{url_for('index')}}">Home</a></div>
 		<hr>
 		{% block content %}
 		{% endblock %}
