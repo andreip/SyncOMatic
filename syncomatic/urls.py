@@ -8,6 +8,8 @@ app.add_url_rule('/', view_func=views.RootView.as_view('index',\
 
 app.add_url_rule('/getFile', view_func=views.getFileView.as_view('getFile'))
 
+app.add_url_rule('/deleteFile', view_func=views.deleteFileView.as_view('deleteFile'))
+
 app.add_url_rule('/login', view_func=views.LoginView.as_view('login',\
     template_name='login.html'))
 

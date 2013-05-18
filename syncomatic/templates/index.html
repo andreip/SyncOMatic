@@ -19,6 +19,10 @@
 			<input type="hidden" name="index" value={{files.index(file)}} />
 			<button type="submit">Download</button>
 		</form>
+		<form method="get" action="{{url_for('deleteFile')}}">
+			<input type="hidden" name="index" value={{files.index(file)}} />
+			<button type="submit">Delete</button>
+		</form>
 		</p>
 	{% endfor %}
 {% endblock %}

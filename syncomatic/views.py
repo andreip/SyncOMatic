@@ -1,6 +1,6 @@
 import os
 
-from flask import render_template, redirect, url_for, request, g
+from flask import render_template, redirect, url_for, request, g, send_file
 from flask.ext.login import login_user, current_user, logout_user
 from flask.views import View
 from werkzeug import secure_filename
@@ -50,7 +50,7 @@ class RootView(RenderTemplateView):
         # A file upload was done.
         elif request.method == 'POST':
             file = request.files['file']
-            if file and self.allowed_file(file.filename):
+            if file:#and self.allowed_file(file.filename):
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 upload_message = 'File %s was successfully uploaded!' % filename
@@ -77,6 +77,22 @@ class getFileView(View):
         fullpath = app.config['UPLOAD_FOLDER'] + "/" + files[int(index)]
         return send_file(fullpath, as_attachment=True)
 
+class deleteFileView(View):
+	"""
+		This view's purpose is to allow a user to delete a file, thus it does
+		not need a template associated with it.
+	"""
+	def dispatch_request(self):
+		# Get the file index that is wanted to be deleted.
+		index = request.args.get('index')
+		from syncomatic import app
+		files = os.listdir(app.config['UPLOAD_FOLDER'])
+		# Target the file one wants to delete
+		fullpath = app.config['UPLOAD_FOLDER'] + "/" + files[int(index)]
+		if os.path.isfile(fullpath):
+			os.unlink(fullpath)
+		# Re-render root page (/)
+		return redirect("/")
 
 @lm.user_loader
 def load_user(id):
