@@ -9,6 +9,7 @@ from syncomatic import app, lm
 from syncomatic.decorators import login_required
 from syncomatic.forms import LoginForm
 from syncomatic.models import User
+from syncomatic import foos
 
 class RenderTemplateView(View):
     """
@@ -44,7 +45,7 @@ class RootView(RenderTemplateView):
         # If we've got a GET request, just render the template with
         # all the uploaded files by the user.
         if request.method == 'GET':
-            files = os.listdir(app.config['UPLOAD_FOLDER'])
+            files = foos.get_filelist()
             return super(RootView, self).dispatch_request(files=files,
                 user=g.user)
         # A file upload was done.
@@ -58,7 +59,7 @@ class RootView(RenderTemplateView):
                 upload_message = 'File not provided or not supported format!'
             # Re-render the index page with upload information regarding the
             # uploaded file through POST.
-            files = os.listdir(app.config['UPLOAD_FOLDER'])
+            files = foos.get_filelist()
             return super(RootView, self).dispatch_request(files=files,
                 upload_message=upload_message, user=g.user)
 
@@ -79,8 +80,8 @@ class getFileView(View):
 
 class deleteFileView(View):
 	"""
-		This view's purpose is to allow a user to delete a file, thus it does
-		not need a template associated with it.
+        This view's purpose is to allow a user to delete a file, thus it does
+        not need a template associated with it.
 	"""
 	def dispatch_request(self):
 		# Get the file index that is wanted to be deleted.

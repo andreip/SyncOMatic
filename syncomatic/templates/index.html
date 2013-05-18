@@ -14,7 +14,7 @@
 	</form>
 
 	{% for file in files %}
-		<p>{{file}}
+		<p>{{file.name}}, {{file.size|filesizeformat}}, {{file.creation_date}}
 		<form method="get" action="{{url_for('getFile')}}">
 			<input type="hidden" name="index" value={{files.index(file)}} />
 			<button type="submit">Download</button>
