@@ -1,8 +1,6 @@
 SyncOMatic
 ==========
 
-#SyncOMatic
-
 ##How to run:
 
 * install flask, follow [docs guide](http://flask.pocoo.org/docs/installation/#installation)
@@ -17,4 +15,4 @@ SyncOMatic
 * download a file (to local) that was uploaded
 * login and logout with a user in the app, it doesn't take into account the password for now and
   no registrations possible for now, just hardcoded account created in the database
-  ** database is in `syncomatic/static/syncomatic.db`
+  * database is in `syncomatic/static/syncomatic.db`
