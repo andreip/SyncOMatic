@@ -6,6 +6,10 @@ form #login_email {
   padding-right: 26px;
 }
 
+form #login_password_confirm {
+  padding-right: 11px;
+}
+
 .login_container {
   width: 260px;
   margin: 0 auto;
@@ -14,4 +18,9 @@ form #login_email {
 
 .logged_in {
   float: right;
+}
+
+.form_errors {
+  font-size: 80%;
+  color: red;
 }

@@ -7,7 +7,7 @@ from werkzeug import secure_filename
 
 from syncomatic import app, lm
 from syncomatic.decorators import login_required
-from syncomatic.forms import LoginForm
+from syncomatic.forms import LoginForm, RegisterForm
 from syncomatic.models import User
 from syncomatic import foos
 
@@ -115,7 +115,6 @@ class LoginView(RenderTemplateView):
         super(LoginView, self).__init__(*args, **kwargs)
 
     def dispatch_request(self):
-        form = LoginForm()
         # User has logged in successfully before.
         if g.user is not None and g.user.is_authenticated():
             return redirect(url_for('index'))
@@ -129,6 +128,23 @@ class LoginView(RenderTemplateView):
             return redirect(url_for('login'))
         return super(LoginView, self).dispatch_request(title='Sign In',
                                                        form=form)
+
+class RegisterView(RenderTemplateView):
+    methods = ['GET', 'POST']
+
+    def __init__(self, *args, **kwargs):
+        super(RegisterView, self).__init__(*args, **kwargs)
+
+    def dispatch_request(self):
+        # User has logged in successfully before.
+        if g.user is not None and g.user.is_authenticated():
+            return redirect(url_for('index'))
+        form = RegisterForm()
+        if form.validate_on_submit():
+            form.register_user()
+            return redirect(url_for('index'))
+        return super(RegisterView, self).dispatch_request(title='Register',
+                                                          form=form)
 
 
 class LogoutView(View):

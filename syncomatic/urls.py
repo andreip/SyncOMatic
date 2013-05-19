@@ -14,3 +14,6 @@ app.add_url_rule('/login', view_func=views.LoginView.as_view('login',\
     template_name='login.html'))
 
 app.add_url_rule('/logout', view_func=views.LogoutView.as_view('logout'))
+
+app.add_url_rule('/register', view_func=views.RegisterView.as_view('register',\
+    template_name='register.html'))

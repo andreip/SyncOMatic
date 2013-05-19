@@ -3,8 +3,8 @@
 
 {% block content %}
 <div class="login_container">
-    <h1>Sign In</h1>
-    <form action="{{url_for('login')}}" method="post" name="login">
+    <h1>Register</h1>
+    <form action="{{url_for('register')}}" method="post" name="register">
         {{form.hidden_tag()}}
         <p>
             <span id="login_email">email:</span>
@@ -18,9 +18,14 @@
             {% for error in form.errors.password %}
                 <span class="form_errors">{{error}}</span>
             {% endfor %}<br>
+
+            <span id="login_password_confirm">confirm:</span>
+            <span>{{form.confirm_password()}}</span><br>
+            {% for error in form.errors.confirm_password %}
+                <span class="form_errors">{{error}}</span>
+            {% endfor %}<br>
         </p>
-        <p>{{form.remember_me}} Remember Me</p>
-        <p><input type="submit" value="Sign In"></p>
+        <p><input type="submit" value="Register"></p>
     </form>
 </div>
 {% endblock %}
