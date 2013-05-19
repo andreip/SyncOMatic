@@ -23,6 +23,19 @@ class RenderTemplateView(View):
         return render_template(self.template_name, **kwargs)
 
 
+@lm.user_loader
+def load_user(id):
+    """Has the purpose of telling flask-login what to use
+       to load a user from database. Hence the decorator.
+    """
+    return User.query.get(int(id))
+
+
+@app.before_request
+def before_request():
+    g.user = current_user
+
+
 class RootView(RenderTemplateView):
     """
         This view manages the index page, and displays all the
@@ -72,40 +85,27 @@ class getFileView(View):
     def dispatch_request(self):
         # Get the file index that is wanted to be downloaded.
         index = request.args.get('index')
-        from syncomatic import app
         files = os.listdir(app.config['UPLOAD_FOLDER'])
         # Target the file one wants to download and send it.
         fullpath = app.config['UPLOAD_FOLDER'] + "/" + files[int(index)]
         return send_file(fullpath, as_attachment=True)
 
+
 class deleteFileView(View):
-	"""
+    """
         This view's purpose is to allow a user to delete a file, thus it does
         not need a template associated with it.
-	"""
-	def dispatch_request(self):
-		# Get the file index that is wanted to be deleted.
-		index = request.args.get('index')
-		from syncomatic import app
-		files = os.listdir(app.config['UPLOAD_FOLDER'])
-		# Target the file one wants to delete
-		fullpath = app.config['UPLOAD_FOLDER'] + "/" + files[int(index)]
-		if os.path.isfile(fullpath):
-			os.unlink(fullpath)
-		# Re-render root page (/)
-		return redirect("/")
-
-@lm.user_loader
-def load_user(id):
-    """Has the purpose of telling flask-login what to use
-       to load a user from database. Hence the decorator.
     """
-    return User.query.get(int(id))
-
-
-@app.before_request
-def before_request():
-    g.user = current_user
+    def dispatch_request(self):
+        # Get the file index that is wanted to be deleted.
+        index = request.args.get('index')
+        files = os.listdir(app.config['UPLOAD_FOLDER'])
+        # Target the file one wants to delete
+        fullpath = app.config['UPLOAD_FOLDER'] + "/" + files[int(index)]
+        if os.path.isfile(fullpath):
+            os.unlink(fullpath)
+        # Re-render root page (/)
+        return redirect(url_for('index'))
 
 
 class LoginView(RenderTemplateView):
@@ -129,7 +129,6 @@ class LoginView(RenderTemplateView):
             return redirect(url_for('login'))
         return super(LoginView, self).dispatch_request(title='Sign In',
                                                        form=form)
-
 
 
 class LogoutView(View):
