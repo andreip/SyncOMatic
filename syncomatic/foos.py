@@ -14,10 +14,11 @@ def get_filelist(path):
     files = []
     for name in filenames:
         # os.stat returns a 10-tuple
-        stats = os.stat(os.path.join(path, name))
+        fullpath = os.path.join(path, name)
+        stats = os.stat(fullpath)
         size = stats[6]
         creation_date = datetime.datetime.fromtimestamp(stats[-2]).strftime("%H:%M %d.%m.%Y")
-        is_dir = os.path.isdir(path)
+        is_dir = os.path.isdir(fullpath)
         f = {'name': name, 'size': size, 'creation_date': creation_date,
             'is_dir': is_dir}
         files.append(f)
