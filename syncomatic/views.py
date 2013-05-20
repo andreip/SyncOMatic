@@ -142,7 +142,8 @@ class RegisterView(RenderTemplateView):
         form = RegisterForm()
         if form.validate_on_submit():
             form.register_user()
-            return redirect(url_for('index'))
+            # Now redirect the user to login so he may login.
+            return redirect(url_for('login'))
         return super(RegisterView, self).dispatch_request(title='Register',
                                                           form=form)
 

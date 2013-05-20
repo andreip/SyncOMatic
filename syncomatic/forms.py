@@ -21,3 +21,7 @@ class RegisterForm(Form):
         """Check if the registered user already exists and raise err."""
         if User.query.filter_by(email = field.data).first():
             raise ValidationError("Email already registed.")
+
+    def register_user(self):
+        """Register a given user."""
+        User.add_user(User(self.email.data, self.password.data))

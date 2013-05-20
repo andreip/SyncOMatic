@@ -30,19 +30,21 @@ class User(db.Model):
     def get_id(self):
         return unicode(self.id)
 
+    @staticmethod
+    def add_user(user):
+        db.session.add(user)
+        db.session.commit()
 
-def init_db():
-    """Delete old database, init a new one and populate it.
-       We do this to sync changes on the models, when runnig
-       run.py.
+    @staticmethod
+    def initdb():
+        """Delete old database, init a new one and populate it.
+           We do this to sync changes on the models, when runnig
+           run.py.
 
-       Order is important. This has to be called only after the User
-       model has been defined.
-    """
-    if os.path.exists(app.config['SQLALCHEMY_DATABASE_URI_PATH']):
-        os.unlink(app.config['SQLALCHEMY_DATABASE_URI_PATH'])
-    db.create_all()
-    db.session.add(User('admin@example.com', 'password'))
-    db.session.commit()
-
-init_db()
+           Order is important. This has to be called only after the User
+           model has been defined.
+        """
+        if os.path.exists(app.config['SQLALCHEMY_DATABASE_URI_PATH']):
+            os.unlink(app.config['SQLALCHEMY_DATABASE_URI_PATH'])
+        db.create_all()
+        User.add_user(User('admin@example.com', 'password'))
