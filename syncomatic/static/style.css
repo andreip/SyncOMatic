@@ -25,7 +25,8 @@ body { margin: 0; background-color: #1a1a1a; }
 .not_logged_in_index_container a.login { position: absolute; color: #fff; font-family: Arial; font-size: 14px; bottom: 49px; right: 337px; }
 
 /* Footer. */
-.footer { background-image: url('footer_container.jpg'); height: 226px; }
+.footer { position: relative; background-image: url('footer_container.jpg'); height: 226px; }
+.footer a { position: absolute; color: #4d6f96; font-size: 24px; font-style: italic; font-family: Myriad Pro, Arial; bottom: 94px; right: 68px; }
 
 /* Clear fix. */
 .group:before, .group:after { content: ""; display: table; }
