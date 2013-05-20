@@ -45,8 +45,11 @@ class RootView(RenderTemplateView):
     """
     methods = ['GET', 'POST']
 
-    @login_required
     def dispatch_request(self):
+        # Render the template now if the user is not authenticateed.
+        if not g.user.is_authenticated():
+            return super(RootView, self).dispatch_request(self)
+
         # Get the user directory.
         base_path = g.user.get_files_path()
         path_message = '/'

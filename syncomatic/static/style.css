@@ -13,7 +13,8 @@ body { margin: 0; background-color: #1a1a1a; }
 
 
 /* Body. */
-.index_container { background-image: url('index_container.jpg'); height: 350px; }
+.not_logged_in_index_container { background-image: url('index_container.jpg'); height: 350px; }
+.logged_in_index_container { height: 350px; }
 .login_container { background-image: url('login_container.jpg'); height: 350px; }
 .register_container { background-image: url('register_container.jpg'); height: 350px; }
 
