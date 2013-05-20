@@ -39,7 +39,7 @@ body { margin: 0; background-color: #1a1a1a; }
 
 /* -- FOOTER --. */
 .footer { position: relative; background-image: url('footer_container.jpg'); height: 225px; }
-.footer a { position: absolute; color: #4d6f96; font-size: 24px; font-style: italic; font-family: Myriad Pro, Arial; bottom: 94px; right: 68px; }
+.footer a { position: absolute; color: #4d6f96; font-size: 24px; font-style: italic; font-family: Myriad Pro, Arial; bottom: 94px; right: 72px; }
 
 /* -- MISC --. */
 
