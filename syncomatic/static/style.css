@@ -19,6 +19,10 @@ body { margin: 0; background-color: #1a1a1a; }
 .register_container { background-image: url('register_container.jpg'); height: 350px; }
 .how_it_works_container { background-image: url('how_it_works.jpg'); height: 404px; }
 
+
+/* Footer. */
+.footer { background-image: url('footer_container.jpg'); height: 226px; }
+
 /* Clear fix. */
 .group:before, .group:after { content: ""; display: table; }
 .group:after { clear: both; }
