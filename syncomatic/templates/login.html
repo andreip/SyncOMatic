@@ -3,24 +3,23 @@
 
 {% block content %}
     <div class="login_container group">
-        <h1>Sign In</h1>
         <form action="{{url_for('login')}}" method="post" name="login">
             {{form.hidden_tag()}}
             <p>
-                <span id="login_email">email:</span>
-                <span>{{form.email()}}</span><br/>
-                {% for error in form.errors.email %}
-                    <span class="form_errors">{{error}}</span>
-                {% endfor %}<br/>
+                <span>{{form.email(placeholder="email")}}
+                    {% for error in form.errors.email %}
+                        <span class="form_errors">{{error}}</span>
+                    {% endfor %}
+                </span><br>
 
-                <span id="login_password">password:</span>
-                <span>{{form.password()}}</span><br/>
-                {% for error in form.errors.password %}
-                    <span class="form_errors">{{error}}</span>
-                {% endfor %}<br/>
+                <span>{{form.password(placeholder="password")}}
+                    {% for error in form.errors.password %}
+                        <span class="form_errors">{{error}}</span>
+                    {% endfor %}
+                </span><br>
             </p>
-            <p>{{form.remember_me}} Remember Me</p>
-            <p><input type="submit" value="Sign In"></input></p>
+            <p class="remember_me">{{form.remember_me}} Remember Me</p>
+            <p><input type="submit" value="LOG IN"></input></p>
         </form>
     </div>
 {% endblock %}

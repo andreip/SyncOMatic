@@ -27,11 +27,15 @@ body { margin: 0; background-color: #1a1a1a; }
 /* Register. */
 .register_container { position: relative; background-image: url('register_container.jpg'); height: 350px; }
 .register_container form { position: absolute; bottom: 28px; left: 148px; }
-.register_container form span input { margin-bottom: 7px; }
+.register_container form input:not([type=submit]) { margin-bottom: 7px; }
 .register_container form input[type=submit] { padding-right: 10px; margin-left: 2px; width: 100px; height: 30px; }
 
 /* Login. */
 .login_container { position: relative; background-image: url('login_container.jpg'); height: 350px; }
+.login_container form { position: absolute; bottom: 22px; left: 148px; }
+.login_container form input:not([type=submit]) { margin-bottom: 7px; }
+.login_container form input[type=submit] { padding-right: 10px; margin-left: 2px; width: 100px; height: 30px; }
+.login_container form .remember_me { color: #fff; }
 
 /* -- FOOTER --. */
 .footer { position: relative; background-image: url('footer_container.jpg'); height: 226px; }
