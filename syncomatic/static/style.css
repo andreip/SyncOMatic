@@ -35,6 +35,7 @@ body {
 .header .header_menu { margin-right: 50px; }
 .header .header_menu li { float: right; margin-right: 40px; margin-top: 30px; }
 .header .header_menu a { color: #fff; text-decoration: none; font-family: Arial; font-size: x-large; }
+.header hr { margin-bottom: 8px; border: none; height: 1px; background-color: #fff; }
 
 
 /* Clear fix. */
