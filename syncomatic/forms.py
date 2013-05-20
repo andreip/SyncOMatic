@@ -1,13 +1,13 @@
-from flask.ext.wtf import Form, TextField, BooleanField, PasswordField
-from flask.ext.wtf import Required
+from flask.ext.wtf import Form, BooleanField, PasswordField, Required
+from flask.ext.wtf.html5 import EmailField
 
 from wtforms.validators import ValidationError, equal_to
 
 from syncomatic.models import User
 
 class LoginForm(Form):
-    email = TextField('email', validators = [Required()])
-    password = TextField('password', validators = [Required()])
+    email = EmailField('email', validators = [Required()])
+    password = PasswordField('password', validators = [Required()])
     remember_me = BooleanField('remember_me', default = False)
 
     def validate_email(form, field):
@@ -23,7 +23,7 @@ class LoginForm(Form):
                 raise ValidationError("Password is incorrect.")
 
 class RegisterForm(Form):
-    email = TextField('email', validators = [Required()])
+    email = EmailField('email', validators = [Required()])
     password = PasswordField('password', validators = [Required(),
                              equal_to('confirm_password')])
     confirm_password = PasswordField('confirm_password',

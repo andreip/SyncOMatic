@@ -3,7 +3,7 @@ body { margin: 0; background-color: #1a1a1a; }
 #wrap { margin: auto; max-width: 1024px; }
 
 
-/* Header. */
+/* -- HEADER --. */
 .header { background-color: #000; height: 100px; width: 100%; top: 0; left: 0; position: relative; }
 .header .title { float: left; margin-left: 40px; margin-top: 40px; }
 .header .header_menu { margin-right: 50px; }
@@ -12,11 +12,11 @@ body { margin: 0; background-color: #1a1a1a; }
 .header hr { margin-bottom: 8px; border: none; height: 1px; background-color: #f2f2f2; }
 
 
-/* Body. */
+/* -- BODY --. */
+
+/* Index. */
 .not_logged_in_index_container { position: relative; background-image: url('index_container.jpg'); height: 350px; }
 .logged_in_index_container { height: 350px; }
-.login_container { position: relative; background-image: url('login_container.jpg'); height: 350px; }
-.register_container { position: relative; background-image: url('register_container.jpg'); height: 350px; }
 .how_it_works_container { position: relative; background-image: url('how_it_works.jpg'); height: 404px; }
 
 .not_logged_in_index_container a { color: #000; }
@@ -24,21 +24,37 @@ body { margin: 0; background-color: #1a1a1a; }
 .not_logged_in_index_container button.register span { font-size: 18px; font-weight: bold; position: absolute; bottom: 5px; right: 30px; }
 .not_logged_in_index_container a.login { position: absolute; color: #fff; font-family: Arial; font-size: 14px; bottom: 49px; right: 337px; }
 
-/* Footer. */
+/* Register. */
+.register_container { position: relative; background-image: url('register_container.jpg'); height: 350px; }
+.register_container form { position: absolute; bottom: 28px; left: 148px; }
+.register_container form span input { margin-bottom: 7px; }
+.register_container form input[type=submit] { padding-right: 10px; margin-left: 2px; width: 100px; height: 30px; }
+
+/* Login. */
+.login_container { position: relative; background-image: url('login_container.jpg'); height: 350px; }
+
+/* -- FOOTER --. */
 .footer { position: relative; background-image: url('footer_container.jpg'); height: 226px; }
 .footer a { position: absolute; color: #4d6f96; font-size: 24px; font-style: italic; font-family: Myriad Pro, Arial; bottom: 94px; right: 68px; }
+
+/* -- MISC --. */
+
+.form_errors { font-size: 80%; color: red; }
+.header a.active { color: #f0c454; }
+
+/* Make an element smoother by adding rounded corners and no border. */
+.border-radius { -moz-border-radius: 7px; -webkit-border-radius: 7px; -khtml-border-radius: 7px; border-radius: 7px; border: none; }
+
+/* Add shadow to button of registering. */
+button.shadow { -o-box-shadow: inset 0 0 3px #000; -moz-box-shadow: inset 0 0 3px #000; -webkit-box-shadow: inset 0 0 3px #000; box-shadow: inset 0 0 3px #000; }
+button:hover { cursor: pointer; cursor: hand; }
+a { text-decoration: none; }
+
+/* Style an input element in a fancy way. */
+input { border: 1px solid black; padding: 5px; padding-left: 10px; background: rgba(27,26,66,1); color: #fff; }
+input { -o-box-shadow: inset 0 0 3px #000; -moz-box-shadow: inset 0 0 3px #000; -webkit-box-shadow: inset 0 0 3px #000; box-shadow: inset 0 0 3px #000; }
 
 /* Clear fix. */
 .group:before, .group:after { content: ""; display: table; }
 .group:after { clear: both; }
 .group { zoom: 1; }
-
-/* Misc. */
-.form_errors { font-size: 80%; color: red; }
-.header a.active { color: #f0c454; }
-/* Make a button smoother by adding rounded corners and no border. */
-button { -moz-border-radius: 7px; -webkit-border-radius: 7px; -khtml-border-radius: 7px; border-radius: 7px; border: none; }
-/* Add shadow to button of registering. */
-button.shadow { -o-box-shadow: inset 0 0 3px #000; -moz-box-shadow: inset 0 0 3px #000; -webkit-box-shadow: inset 0 0 3px #000; box-shadow: inset 0 0 3px #000; }
-button:hover { cursor: pointer; cursor: hand; }
-a { text-decoration: none; }
