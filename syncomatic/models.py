@@ -35,6 +35,19 @@ class User(db.Model):
         """Check if a given password is the same as the stored hash."""
         return User.get_hexdigest(password) == self.password
 
+    def get_files_path(self):
+        """Get the path where the user's files are stored.
+           The user directory looks like this:
+                files/$id/
+           where the $id is the self.id of the user who requests the files.
+        """
+        path = os.path.join(app.config['UPLOAD_FOLDER'], str(self.id))
+        # Create the user directory if it does
+        # not already exist.
+        if not os.path.isdir(path):
+            os.makedirs(path)
+        return path
+
     @staticmethod
     def get_hexdigest(password):
         return hashlib.sha1(password).hexdigest()
