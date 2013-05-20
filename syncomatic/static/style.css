@@ -8,17 +8,21 @@ body { margin: 0; background-color: #1a1a1a; }
 .header .title { float: left; margin-left: 40px; margin-top: 40px; }
 .header .header_menu { margin-right: 50px; }
 .header li { float: right; margin-right: 40px; margin-top: 30px; }
-.header a { color: #f2f2f2; text-decoration: none; font-family: Arial; font-size: x-large; }
+.header a { color: #f2f2f2; font-family: Arial; font-size: x-large; }
 .header hr { margin-bottom: 8px; border: none; height: 1px; background-color: #f2f2f2; }
 
 
 /* Body. */
-.not_logged_in_index_container { background-image: url('index_container.jpg'); height: 350px; }
+.not_logged_in_index_container { position: relative; background-image: url('index_container.jpg'); height: 350px; }
 .logged_in_index_container { height: 350px; }
-.login_container { background-image: url('login_container.jpg'); height: 350px; }
-.register_container { background-image: url('register_container.jpg'); height: 350px; }
-.how_it_works_container { background-image: url('how_it_works.jpg'); height: 404px; }
+.login_container { position: relative; background-image: url('login_container.jpg'); height: 350px; }
+.register_container { position: relative; background-image: url('register_container.jpg'); height: 350px; }
+.how_it_works_container { position: relative; background-image: url('how_it_works.jpg'); height: 404px; }
 
+.not_logged_in_index_container a { color: #000; }
+.not_logged_in_index_container button.register { background-color: #f0c454; width: 102px; height: 38px; position: absolute; bottom: 41px; right: 429px; }
+.not_logged_in_index_container button.register span { font-size: 18px; font-weight: bold; position: absolute; bottom: 5px; right: 30px; }
+.not_logged_in_index_container a.login { position: absolute; color: #fff; font-family: Arial; font-size: 14px; bottom: 49px; right: 337px; }
 
 /* Footer. */
 .footer { background-image: url('footer_container.jpg'); height: 226px; }
@@ -31,3 +35,9 @@ body { margin: 0; background-color: #1a1a1a; }
 /* Misc. */
 .form_errors { font-size: 80%; color: red; }
 .header a.active { color: #f0c454; }
+/* Make a button smoother by adding rounded corners and no border. */
+button { -moz-border-radius: 7px; -webkit-border-radius: 7px; -khtml-border-radius: 7px; border-radius: 7px; border: none; }
+/* Add shadow to button of registering. */
+button.shadow { -o-box-shadow: inset 0 0 3px #000; -moz-box-shadow: inset 0 0 3px #000; -webkit-box-shadow: inset 0 0 3px #000; box-shadow: inset 0 0 3px #000; }
+button:hover { cursor: pointer; cursor: hand; }
+a { text-decoration: none; }
