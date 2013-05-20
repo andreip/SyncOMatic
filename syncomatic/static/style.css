@@ -1,44 +1,33 @@
-.nav {
-  padding-left: 40px;
-}
+/* The page layout. */
+body { margin: 0; background-color: #1a1a1a; }
+#wrap { margin: auto; max-width: 1024px; }
 
-form #login_email {
-  padding-right: 26px;
-}
 
-form #login_password_confirm {
-  padding-right: 11px;
-}
-
-.login_container {
-  width: 260px;
-  margin: 0 auto;
-  padding-top: 30px;
-}
-
-.logged_in {
-  float: right;
-}
-
-.form_errors {
-  font-size: 80%;
-  color: red;
-}
-
-body {
-  padding-top: 100px;
-}
-
-/* HEADER */
-.header { background-color: #000; height: 100px; width: 100%; top: 0; left: 0; position: fixed; }
+/* Header. */
+.header { background-color: #000; height: 100px; width: 100%; top: 0; left: 0; position: relative; }
 .header .title { float: left; margin-left: 40px; margin-top: 40px; }
 .header .header_menu { margin-right: 50px; }
-.header .header_menu li { float: right; margin-right: 40px; margin-top: 30px; }
-.header .header_menu a { color: #fff; text-decoration: none; font-family: Arial; font-size: x-large; }
-.header hr { margin-bottom: 8px; border: none; height: 1px; background-color: #fff; }
+.header li { float: right; margin-right: 40px; margin-top: 30px; }
+.header a { color: #f2f2f2; text-decoration: none; font-family: Arial; font-size: x-large; }
+.header hr { margin-bottom: 8px; border: none; height: 1px; background-color: #f2f2f2; }
 
+
+/* Body. */
+.not_logged_in_index_container { background-image: url('index_container.jpg'); height: 350px; }
+.logged_in_index_container { height: 350px; }
+.login_container { background-image: url('login_container.jpg'); height: 350px; }
+.register_container { background-image: url('register_container.jpg'); height: 350px; }
+.how_it_works_container { background-image: url('how_it_works.jpg'); height: 404px; }
+
+
+/* Footer. */
+.footer { background-image: url('footer_container.jpg'); height: 226px; }
 
 /* Clear fix. */
 .group:before, .group:after { content: ""; display: table; }
 .group:after { clear: both; }
 .group { zoom: 1; }
+
+/* Misc. */
+.form_errors { font-size: 80%; color: red; }
+.header a.active { color: #f0c454; }
