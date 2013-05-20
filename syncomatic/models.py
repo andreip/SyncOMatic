@@ -50,4 +50,4 @@ class User(db.Model):
         if os.path.exists(app.config['SQLALCHEMY_DATABASE_URI_PATH']):
             os.unlink(app.config['SQLALCHEMY_DATABASE_URI_PATH'])
         db.create_all()
-        User.add_user(User('admin@example.com', 'password'))
+        User.add_user(User('admin@example.com', 'admin'))

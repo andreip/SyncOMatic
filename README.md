@@ -6,7 +6,11 @@ SyncOMatic
 * install flask, follow [docs guide](http://flask.pocoo.org/docs/installation/#installation)
 * install all needed packets from `requirements.txt` file, all using `pip install $name`
 * `$ ./run.py` opens server listening on [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
-* login credentials: the user is **admin@example.com**, for *password* enter anything not blank, doesn't matter
+* `$ ./run.py --initdb` does the same thing but it also creates the database,
+  for the times when you want to erase your database. The default user added into
+  database is **admin@example.com** with password **admin**.
+* **NOTE**: you should run with `--initdb` first time, when you don't have a
+  database created.
 
 
 ##What it can do (in progress):
