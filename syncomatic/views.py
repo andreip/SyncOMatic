@@ -1,4 +1,5 @@
 import os
+import shutil
 
 from flask import render_template, redirect, url_for, request, g, send_file
 from flask.ext.login import login_user, current_user, logout_user
@@ -112,8 +113,11 @@ class deleteFileView(getFileView):
         index = request.args.get('index')
         # Target the file one wants to delete
         fullpath = self.get_filepath_by_index(request.args.get('path'), index)
-        if os.path.isfile(fullpath):
-            os.unlink(fullpath)
+        if os.path.exists(fullpath):
+            if os.path.isfile(fullpath):
+                os.unlink(fullpath)
+            else:
+                shutil.rmtree(fullpath)
         # Re-render root page (/)
         return redirect(url_for('index'))
 
