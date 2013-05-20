@@ -30,6 +30,9 @@ class User(db.Model):
     def get_id(self):
         return unicode(self.id)
 
+    def has_password(self, password):
+        return self.password == password
+
     @staticmethod
     def add_user(user):
         db.session.add(user)
