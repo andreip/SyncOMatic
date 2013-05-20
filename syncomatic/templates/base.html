@@ -13,6 +13,9 @@
             {% include "header.html" %}
             {% block content %}
             {% endblock %}
+            {% if not g.user.is_authenticated() %}
+                <div class="how_it_works_container"></div>
+            {% endif %}
             {% include "footer.html" %}
         </div>
     </body>

@@ -17,7 +17,7 @@ body { margin: 0; background-color: #1a1a1a; }
 .logged_in_index_container { height: 350px; }
 .login_container { background-image: url('login_container.jpg'); height: 350px; }
 .register_container { background-image: url('register_container.jpg'); height: 350px; }
-
+.how_it_works_container { background-image: url('how_it_works.jpg'); height: 404px; }
 
 /* Clear fix. */
 .group:before, .group:after { content: ""; display: table; }
