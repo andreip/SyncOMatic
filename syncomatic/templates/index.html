@@ -13,13 +13,19 @@
         <input type=submit value=Upload>
     </form>
 
+    <span>{{ path_msg }}<span>
     {% for file in files %}
+        {% if file.is_dir %}
+            <!-- TODO folder js -->
+        {% endif %}
         <p>{{file.name}}, {{file.size|filesizeformat}}, {{file.creation_date}}
             <form method="get" action="{{url_for('getFile')}}">
+                <input type="hidden" name="path" value={{path}} />
                 <input type="hidden" name="index" value={{files.index(file)}} />
                 <button type="submit">Download</button>
             </form>
             <form method="get" action="{{url_for('deleteFile')}}">
+                <input type="hidden" name="path" value={{path}} />
                 <input type="hidden" name="index" value={{files.index(file)}} />
                 <button type="submit">Delete</button>
             </form>
