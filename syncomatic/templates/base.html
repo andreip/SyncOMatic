@@ -6,13 +6,17 @@
 		{% else %}
 			<title>SyncOMatic</title>
 		{% endif %}
-		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}"/>
+		<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}"/>
 	</head>
 	<body>
-		<div class="nav">Links: <a href="{{url_for('index')}}">Home</a></div>
-		<hr>
-		{% block content %}
-		{% endblock %}
+		<div id="wrap">
+			{% include "header.html" %}
+			<hr>
+			{% block content %}
+			{% endblock %}
+			<hr>
+			{% include "footer.html" %}
+		</div>
 	</body>
 </html>
 	
