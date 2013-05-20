@@ -1,34 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
-	<span class="logged_in">Hi,
-		<a href='#'>{{user.email}}</a>
-		<a href="{{url_for('logout')}}">Logout</a>
-	</span>
+    <span class="logged_in">Hi,
+        <a href='#'>{{user.email}}</a>
+        <a href="{{url_for('logout')}}">Logout</a>
+    </span>
 
-	{% if upload_message %}
-		<span>{{ upload_message }}<span>
-	{% endif %}
-	<form action="/" method=post enctype=multipart/form-data>
-		<p><input type=file name=file>
-		<input type=submit value=Upload>
-	</form>
+    {% if upload_message %}
+        <span>{{ upload_message }}<span>
+    {% endif %}
+    <form action="/" method=post enctype=multipart/form-data>
+        <p><input type=file name=file>
+        <input type=submit value=Upload>
+    </form>
 
     <span>{{ path_msg }}<span>
-	{% for file in files %}
+    {% for file in files %}
         {% if file.is_dir %}
             <!-- TODO folder js -->
         {% endif %}
-		<p>{{file.name}}, {{file.size|filesizeformat}}, {{file.creation_date}}
-		<form method="get" action="{{url_for('getFile')}}">
-			<input type="hidden" name="path" value={{path}} />
-			<input type="hidden" name="index" value={{files.index(file)}} />
-			<button type="submit">Download</button>
-		</form>
-		<form method="get" action="{{url_for('deleteFile')}}">
-			<input type="hidden" name="path" value={{path}} />
-			<input type="hidden" name="index" value={{files.index(file)}} />
-			<button type="submit">Delete</button>
-		</form>
-		</p>
-	{% endfor %}
+        <p>{{file.name}}, {{file.size|filesizeformat}}, {{file.creation_date}}
+            <form method="get" action="{{url_for('getFile')}}">
+                <input type="hidden" name="path" value={{path}} />
+                <input type="hidden" name="index" value={{files.index(file)}} />
+                <button type="submit">Download</button>
+            </form>
+            <form method="get" action="{{url_for('deleteFile')}}">
+                <input type="hidden" name="path" value={{path}} />
+                <input type="hidden" name="index" value={{files.index(file)}} />
+                <button type="submit">Delete</button>
+            </form>
+        </p>
+    {% endfor %}
 {% endblock %}

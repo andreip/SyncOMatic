@@ -24,3 +24,21 @@ form #login_password_confirm {
   font-size: 80%;
   color: red;
 }
+
+body {
+  padding-top: 100px;
+}
+
+/* HEADER */
+.header { background-color: #000; height: 100px; width: 100%; top: 0; left: 0; position: fixed; }
+.header .title { float: left; margin-left: 40px; margin-top: 40px; }
+.header .header_menu { margin-right: 50px; }
+.header .header_menu li { float: right; margin-right: 40px; margin-top: 30px; }
+.header .header_menu a { color: #fff; text-decoration: none; font-family: Arial; font-size: x-large; }
+.header hr { margin-bottom: 8px; border: none; height: 1px; background-color: #fff; }
+
+
+/* Clear fix. */
+.group:before, .group:after { content: ""; display: table; }
+.group:after { clear: both; }
+.group { zoom: 1; }

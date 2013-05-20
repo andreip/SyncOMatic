@@ -1,18 +1,19 @@
 <!doctype html>
 <html>
-	<head>
-		{% if title %}
-			<title>SyncOMatic - {{title}}</title>
-		{% else %}
-			<title>SyncOMatic</title>
-		{% endif %}
-		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}"/>
-	</head>
-	<body>
-		<div class="nav">Links: <a href="{{url_for('index')}}">Home</a></div>
-		<hr>
-		{% block content %}
-		{% endblock %}
-	</body>
+    <head>
+        {% if title %}
+            <title>SyncOMatic - {{title}}</title>
+        {% else %}
+            <title>SyncOMatic</title>
+        {% endif %}
+        <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}"/>
+    </head>
+    <body>
+        <div id="wrap">
+            {% include "header.html" %}
+            {% block content %}
+            {% endblock %}
+            {% include "footer.html" %}
+        </div>
+    </body>
 </html>
-	
