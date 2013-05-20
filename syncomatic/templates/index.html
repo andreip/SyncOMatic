@@ -1,28 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
-	<span class="logged_in">Hi,
-		<a href='#'>{{user.email}}</a>
-		<a href="{{url_for('logout')}}">Logout</a>
-	</span>
+    <span class="logged_in">Hi,
+        <a href='#'>{{user.email}}</a>
+        <a href="{{url_for('logout')}}">Logout</a>
+    </span>
 
-	{% if upload_message %}
-		<span>{{ upload_message }}<span>
-	{% endif %}
-	<form action="/" method=post enctype=multipart/form-data>
-		<p><input type=file name=file>
-		<input type=submit value=Upload>
-	</form>
+    {% if upload_message %}
+        <span>{{ upload_message }}<span>
+    {% endif %}
+    <form action="/" method=post enctype=multipart/form-data>
+        <p><input type=file name=file>
+        <input type=submit value=Upload>
+    </form>
 
-	{% for file in files %}
-		<p>{{file.name}}, {{file.size|filesizeformat}}, {{file.creation_date}}
-		<form method="get" action="{{url_for('getFile')}}">
-			<input type="hidden" name="index" value={{files.index(file)}} />
-			<button type="submit">Download</button>
-		</form>
-		<form method="get" action="{{url_for('deleteFile')}}">
-			<input type="hidden" name="index" value={{files.index(file)}} />
-			<button type="submit">Delete</button>
-		</form>
-		</p>
-	{% endfor %}
+    {% for file in files %}
+        <p>{{file.name}}, {{file.size|filesizeformat}}, {{file.creation_date}}
+            <form method="get" action="{{url_for('getFile')}}">
+                <input type="hidden" name="index" value={{files.index(file)}} />
+                <button type="submit">Download</button>
+            </form>
+            <form method="get" action="{{url_for('deleteFile')}}">
+                <input type="hidden" name="index" value={{files.index(file)}} />
+                <button type="submit">Delete</button>
+            </form>
+        </p>
+    {% endfor %}
 {% endblock %}
