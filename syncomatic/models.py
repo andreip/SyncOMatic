@@ -1,4 +1,5 @@
 import os
+import hashlib
 
 from flask.ext.sqlalchemy import SQLAlchemy
 from syncomatic import app
@@ -8,12 +9,12 @@ db = SQLAlchemy(app)
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True)
-    password = db.Column(db.String(30))
+    password = db.Column(db.String(64))
 
     def __init__(self, email, password):
         self.email = email
-        # TODO(andreip): hack, save file in plaintext.
-        self.password = password
+        # Store a hash of the password.
+        self.password = User.get_hexdigest(password)
 
     def __repr__(self):
         return '<User %r>' % self.email
@@ -31,7 +32,12 @@ class User(db.Model):
         return unicode(self.id)
 
     def has_password(self, password):
-        return self.password == password
+        """Check if a given password is the same as the stored hash."""
+        return User.get_hexdigest(password) == self.password
+
+    @staticmethod
+    def get_hexdigest(password):
+        return hashlib.sha1(password).hexdigest()
 
     @staticmethod
     def add_user(user):
