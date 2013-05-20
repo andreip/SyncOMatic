@@ -44,35 +44,29 @@ class RootView(RenderTemplateView):
     """
     methods = ['GET', 'POST']
 
-    def __init__(self, *args, **kwargs):
-        super(RootView, self).__init__(*args, **kwargs)
-        self.allowed_extensions =\
-            set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-
-    def allowed_file(self, filename):
-        return '.' in filename and \
-            filename.rsplit('.', 1)[1] in self.allowed_extensions
-
     @login_required
     def dispatch_request(self):
+        # Get the user directory.
+        user_dir = g.user.get_files_path()
+
         # If we've got a GET request, just render the template with
         # all the uploaded files by the user.
         if request.method == 'GET':
-            files = foos.get_filelist()
+            files = foos.get_filelist(user_dir)
             return super(RootView, self).dispatch_request(files=files,
                 user=g.user)
         # A file upload was done.
         elif request.method == 'POST':
             file = request.files['file']
-            if file:#and self.allowed_file(file.filename):
+            if file:
                 filename = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                file.save(os.path.join(user_dir, filename))
                 upload_message = 'File %s was successfully uploaded!' % filename
             else:
                 upload_message = 'File not provided or not supported format!'
+            files = foos.get_filelist(user_dir)
             # Re-render the index page with upload information regarding the
             # uploaded file through POST.
-            files = foos.get_filelist()
             return super(RootView, self).dispatch_request(files=files,
                 upload_message=upload_message, user=g.user)
 
@@ -82,26 +76,29 @@ class getFileView(View):
         This view's purpose is to allow a user to download files, thus it does
         not need a template associated with it.
     """
-    def dispatch_request(self):
+    def get_filepath_by_index(self, index):
+        # Get the user directory.
+        user_dir = g.user.get_files_path()
         # Get the file index that is wanted to be downloaded.
-        index = request.args.get('index')
-        files = os.listdir(app.config['UPLOAD_FOLDER'])
+        files = os.listdir(user_dir)
         # Target the file one wants to download and send it.
-        fullpath = app.config['UPLOAD_FOLDER'] + "/" + files[int(index)]
-        return send_file(fullpath, as_attachment=True)
+        fullpath = os.path.join(user_dir, files[int(index)])
+        return fullpath
+
+    def dispatch_request(self):
+        index = request.args.get('index')
+        return send_file(self.get_filepath_by_index(index), as_attachment=True)
 
 
-class deleteFileView(View):
+class deleteFileView(getFileView):
     """
         This view's purpose is to allow a user to delete a file, thus it does
         not need a template associated with it.
     """
     def dispatch_request(self):
-        # Get the file index that is wanted to be deleted.
         index = request.args.get('index')
-        files = os.listdir(app.config['UPLOAD_FOLDER'])
         # Target the file one wants to delete
-        fullpath = app.config['UPLOAD_FOLDER'] + "/" + files[int(index)]
+        fullpath = self.get_filepath_by_index(index)
         if os.path.isfile(fullpath):
             os.unlink(fullpath)
         # Re-render root page (/)
