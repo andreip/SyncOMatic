@@ -78,7 +78,7 @@ body { margin: 0; background-color: #1a1a1a; }
 
 /* -- MISC --. */
 
-.form_errors { font-size: 80%; color: red; }
+.form_errors { font-size: 80% !important; color: red !important; }
 .header a.active { color: #f0c454; }
 
 /* Make an element smoother by adding rounded corners and no border. */

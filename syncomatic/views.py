@@ -5,11 +5,10 @@ import zipfile
 from flask import render_template, redirect, url_for, request, g, send_file
 from flask.ext.login import login_user, current_user, logout_user
 from flask.views import View
-from werkzeug import secure_filename
 
 from syncomatic import app, lm
 from syncomatic.decorators import login_required
-from syncomatic.forms import LoginForm, RegisterForm
+from syncomatic.forms import LoginForm, RegisterForm, UploadForm
 from syncomatic.models import User
 from syncomatic import foos
 
@@ -47,9 +46,11 @@ class RootView(RenderTemplateView):
     methods = ['GET', 'POST']
 
     def dispatch_request(self):
+        form = UploadForm()
+
         # Render the template now if the user is not authenticateed.
         if not g.user.is_authenticated():
-            return super(RootView, self).dispatch_request(self)
+            return super(RootView, self).dispatch_request(self, form=form)
 
         # Get the user directory.
         base_path = g.user.get_files_path()
@@ -67,22 +68,19 @@ class RootView(RenderTemplateView):
             # Return just the relative path to the base path
             return super(RootView, self).dispatch_request\
                 (path=current_path, path_msg=path_message,
-                 files=files, user=g.user)
+                 files=files, user=g.user, form=form)
         # A file upload was done.
         elif request.method == 'POST':
-            file = request.files['file']
-            if file:
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(current_path, filename))
-                upload_message = 'File %s was successfully uploaded!' % filename
-            else:
-                upload_message = 'File not provided or not supported format!'
+            if form.validate_on_submit():
+                form.save_file(current_path)
+                return redirect(url_for('index'))
             files = foos.get_filelist(current_path)
             # Re-render the index page with upload information regarding the
             # uploaded file through POST.
             return super(RootView, self).dispatch_request\
                 (path=current_path, path_msg=path_message,
-                 files=files, upload_message=upload_message, user=g.user)
+                 files=files, user=g.user,
+                 form=form)
 
 
 class getFileView(View):

@@ -1,7 +1,11 @@
+import os
+
 from flask.ext.wtf import Form, BooleanField, PasswordField, Required
 from flask.ext.wtf.html5 import EmailField
+from flask.ext.wtf.file import FileField
 
 from wtforms.validators import ValidationError, equal_to
+from werkzeug import secure_filename
 
 from syncomatic.models import User
 
@@ -37,3 +41,13 @@ class RegisterForm(Form):
     def register_user(self):
         """Register a given user."""
         User.add_user(User(self.email.data, self.password.data))
+
+class UploadForm(Form):
+    """Form used for uploading files. This form
+       is intended only for validation purposes.
+    """
+    upload = FileField("Upload your image", validators=[Required()])
+
+    def save_file(self, path):
+        filename = secure_filename(self.upload.data.filename)
+        self.upload.data.save(os.path.join(path, filename))
