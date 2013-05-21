@@ -27,16 +27,18 @@
                 </thead>
                 <tbody>
                     {% for file in files %}
-                        {% if file.is_dir %}
-                            <!-- TODO folder js -->
-                        {% endif %}
                         <tr {% if loop.index % 2 != 0 %}
                                 class="light"
                             {% else %}
                                 class="dark"
                             {% endif %}
                         >
-                            <td>{{file.name}}</td>
+                        {% if file.is_dir %}
+                            <td class="folder_file">{{file.name}}</td>
+                            <!-- TODO folder js -->
+                        {% else %}
+                            <td class="regular_file">{{file.name}}</td>
+                        {% endif %}
                             <td>{{file.size|filesizeformat}}</td>
                             <td>{{file.creation_date}}</td>
                             <td>
