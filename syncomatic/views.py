@@ -109,7 +109,7 @@ class getFileView(View):
             return send_file(fullpath, as_attachment=True)
         else:
             # TODO function that returns the zip folder path using g.user.get()
-            zipfolder = os.path.join(g.user.get_files_path(), 'zips')
+            zipfolder = g.user.get_files_path() + 'zips'
             if not os.path.exists(zipfolder):
                 os.makedirs(zipfolder)
             zipname = foos.get_unused_name(zipfolder)
@@ -156,7 +156,7 @@ class LoginView(RenderTemplateView):
             if user:
                 login_user(user, remember = form.remember_me.data)
                 # Delete old user zip folder
-                zipfolder = os.path.join(g.user.get_files_path(), 'zips')
+                zipfolder = g.user.get_files_path() + 'zips'
                 if os.path.exists(zipfolder):
                     shutil.rmtree(zipfolder)
                 return redirect(url_for('index'))
