@@ -5,6 +5,7 @@ from flask.ext.wtf.html5 import EmailField
 from flask.ext.wtf.file import FileField
 
 from wtforms.validators import ValidationError, equal_to
+from wtforms.fields import HiddenField
 from werkzeug import secure_filename
 
 from syncomatic.models import User
@@ -51,3 +52,14 @@ class UploadForm(Form):
     def save_file(self, path):
         filename = secure_filename(self.upload.data.filename)
         self.upload.data.save(os.path.join(path, filename))
+
+class CreateFolderForm(Form):
+    """Form used for uploading files. This form
+       is intended only for validation purposes.
+    """
+    directory = HiddenField("The new directory", validators=[Required()])
+
+    def create_directory(self, path):
+        new_dir = os.path.join(path, self.directory.data)
+        if not os.path.exists(new_dir):
+            os.makedirs(new_dir)

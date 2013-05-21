@@ -8,7 +8,8 @@ from flask.views import View
 
 from syncomatic import app, lm
 from syncomatic.decorators import login_required
-from syncomatic.forms import LoginForm, RegisterForm, UploadForm
+from syncomatic.forms import (LoginForm, RegisterForm, UploadForm,
+                              CreateFolderForm)
 from syncomatic.models import User
 from syncomatic import foos
 
@@ -50,7 +51,7 @@ class RootView(RenderTemplateView):
 
         # Render the template now if the user is not authenticateed.
         if not g.user.is_authenticated():
-            return super(RootView, self).dispatch_request(self, form=form)
+            return super(RootView, self).dispatch_request(self)
 
         # Get the user directory.
         base_path = g.user.get_files_path()
@@ -186,4 +187,16 @@ class LogoutView(View):
 
     def dispatch_request(self):
         logout_user()
+        return redirect(url_for('index'))
+
+class CreateFolderView(View):
+    methods = ['POST']
+
+    @login_required
+    def dispatch_request(self):
+        form = CreateFolderForm(request.form)
+        if form.validate_on_submit():
+            # FIXME / TODO: this is hardcoded to user home
+            # as the directory where to create the new directory.
+            form.create_directory(g.user.get_files_path())
         return redirect(url_for('index'))
