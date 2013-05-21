@@ -1,5 +1,6 @@
 import os
 import datetime
+import zipfile
 
 from syncomatic import app, lm
 from syncomatic.models import User
@@ -24,3 +25,28 @@ def get_filelist(path):
         files.append(f)
 
     return files
+
+def get_unused_name(zipfolder):
+    filename = 'files'
+    ext = '.zip'
+    if not os.path.exists(os.path.join(zipfolder, filename + ext)):
+        return filename + ext
+    else:
+        i = 1
+        while os.path.exists(os.path.join(zipfolder, filename + str(i) + ext)):
+            i += 1
+
+        return filename + str(i) + ext
+
+def zipdir(path, zip_file):
+    for root, folders, files in os.walk(path):
+            # Include all subfolders, including empty ones.
+            for folder_name in folders:
+                # Item will be put inside archive under item_name
+                item_name = os.path.join(os.path.basename(root), folder_name)
+                zip_file.write(os.path.join(root, folder_name), item_name)
+
+            for file_name in files:
+                # Item will be put inside archive under item_name
+                item_name = os.path.join(os.path.basename(root), file_name)
+                zip_file.write(os.path.join(root, file_name), item_name)
