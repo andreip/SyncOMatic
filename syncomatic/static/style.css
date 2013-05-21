@@ -30,7 +30,7 @@ body { margin: 0; background-color: #1a1a1a; }
 .logged_in_index_container .sign-out { margin-left: 20px; color: #c3c6c7; font-size: 18px; }
 .logged_in_index_container .sign-out:hover { color: #898e90; }
 .logged_in_index_container .logged_in { float: right; }
-.logged_in_index_container .upload_form { position: absolute; bottom: 0px; left: 52px; }
+.logged_in_index_container .upload_form { position: absolute; bottom: 15px; left: 52px; }
 .logged_in_index_container .upload_form input[type=file] { color: #fff; }
 .logged_in_index_container .upload_form input[type=submit] { font-size: 14px; font-weight: bold; margin-left: 0px; }
 .logged_in_index_container .upload_form input[type=submit] { display: inline-block; padding-left:20px; line-height:16px; background: transparent url('upload_icon.png') center left no-repeat; }
