@@ -21,6 +21,7 @@ body { margin: 0; background-color: #1a1a1a; }
 .not_logged_in_index_container button.register { background-color: #f0c454; width: 102px; height: 38px; position: absolute; bottom: 41px; right: 429px; }
 .not_logged_in_index_container button.register span { font-size: 18px; font-weight: bold; position: absolute; bottom: 5px; right: 30px; }
 .not_logged_in_index_container a.login { position: absolute; color: #fff; font-family: Arial; font-size: 14px; bottom: 49px; right: 337px; }
+.not_logged_in_index_container a.login { display: inline-block; padding-left:30px; line-height:11px; background: transparent url('arrow_icon.png') center left no-repeat; }
 
 /* Files after login has been done. */
 .logged_in_index_container { position: relative; height: 452px; background-image: url('files_container.jpg'); }
