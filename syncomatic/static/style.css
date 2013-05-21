@@ -61,8 +61,8 @@ button:hover { cursor: pointer; cursor: hand; }
 a { text-decoration: none; }
 
 /* Style an input element in a fancy way. */
-input { border: 1px solid black; padding: 5px; padding-left: 10px; background: rgba(27,26,66,1); color: #fff; }
-input { -o-box-shadow: inset 0 0 3px #000; -moz-box-shadow: inset 0 0 3px #000; -webkit-box-shadow: inset 0 0 3px #000; box-shadow: inset 0 0 3px #000; }
+input.border-style { border: 1px solid black; padding: 5px; padding-left: 10px; background: rgba(27,26,66,1); color: #fff; }
+input.shadow-style { -o-box-shadow: inset 0 0 3px #000; -moz-box-shadow: inset 0 0 3px #000; -webkit-box-shadow: inset 0 0 3px #000; box-shadow: inset 0 0 3px #000; }
 
 /* Placeholder coloring. */
 ::-webkit-input-placeholder { /* WebKit browsers */
