@@ -7,22 +7,25 @@
                 <a class="sign-out" href="{{url_for('logout')}}">Sign out</a>
             </div>
 
+
             <form id="create_folder" method="post" action="{{url_for('create_folder')}}">
                 {{form.hidden_tag()}}
                 <input id="hidden_directory_name" type='hidden' name='directory' value="test_dir">
             </form>
-            <input type='button' id="create_folder_button" onclick="create_folder()" value="New Folder">
 
-            <form class="upload_form" action="{{url_for('index')}}" method=post enctype=multipart/form-data>
-                {{form.hidden_tag()}}
-                <div class="upload_form_container">
-                    {{form.upload(class="transparent-stype")}}
-                    <input class="transparent-style" type="submit" value="Upload"></input>
-                    {% for error in form.errors.upload %}
-                        <span class="form_errors">{{error}}</span>
-                    {% endfor %}
-                </div>
-            </form>
+            <div class="bottom-buttons group">
+                <form class="upload_form" action="{{url_for('index')}}" method=post enctype=multipart/form-data>
+                    {{form.hidden_tag()}}
+                    <div class="upload_form_container">
+                        {{form.upload(class="transparent-stype")}}
+                        <input class="transparent-style" type="submit" value="Upload"></input>
+                        {% for error in form.errors.upload %}
+                            <span class="form_errors">{{error}}</span>
+                        {% endfor %}
+                    </div>
+                </form>
+                <input type='button' id="create_folder_button" class="transparent-style" onclick="create_folder()" value="New Folder">
+            </div>
 
             <span class="current_path">{{ path_msg }}</span>
             <table>
