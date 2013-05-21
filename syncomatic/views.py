@@ -1,5 +1,6 @@
 import os
 import shutil
+import zipfile
 
 from flask import render_template, redirect, url_for, request, g, send_file
 from flask.ext.login import login_user, current_user, logout_user
@@ -103,8 +104,21 @@ class getFileView(View):
 
     def dispatch_request(self):
         index = request.args.get('index')
-        return send_file(self.get_filepath_by_index\
-                    (request.args.get('path'), index), as_attachment=True)
+        fullpath = self.get_filepath_by_index(request.args.get('path'), index)
+        if os.path.isfile(fullpath):
+            return send_file(fullpath, as_attachment=True)
+        else:
+            # TODO function that returns the zip folder path using g.user.get()
+            zipfolder = os.path.join(g.user.get_files_path(), 'zips')
+            if not os.path.exists(zipfolder):
+                os.makedirs(zipfolder)
+            zipname = foos.get_unused_name(zipfolder)
+
+            zip = zipfile.ZipFile(os.path.join(zipfolder, zipname), 'w')
+            foos.zipdir(fullpath, zip)
+            zip.close()
+            
+            return send_file(os.path.join(zipfolder, zipname), as_attachment=True)
 
 
 class deleteFileView(getFileView):
@@ -141,6 +155,10 @@ class LoginView(RenderTemplateView):
             # If user exists in our DB, log him in.
             if user:
                 login_user(user, remember = form.remember_me.data)
+                # Delete old user zip folder
+                zipfolder = os.path.join(g.user.get_files_path(), 'zips')
+                if os.path.exists(zipfolder):
+                    shutil.rmtree(zipfolder)
                 return redirect(url_for('index'))
             return redirect(url_for('login'))
         return super(LoginView, self).dispatch_request(title='Sign In',
