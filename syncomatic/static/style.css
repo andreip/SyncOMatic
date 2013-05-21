@@ -15,20 +15,24 @@ body { margin: 0; background-color: #1a1a1a; }
 /* -- BODY --. */
 
 /* Index. */
-.not_logged_in_index_container { position: relative; background-image: url('index_container.jpg'); height: 350px; }
-.logged_in_index_container { height: 452px; background-image: url('files_container.jpg'); }
-.how_it_works_container { position: relative; background-image: url('how_it_works.jpg'); height: 404px; }
 
+/* Not logged in yet, on index. */
+.not_logged_in_index_container { position: relative; background-image: url('index_container.jpg'); height: 350px; }
 .not_logged_in_index_container a { color: #000; }
 .not_logged_in_index_container button.register { background-color: #f0c454; width: 102px; height: 38px; position: absolute; bottom: 41px; right: 429px; }
 .not_logged_in_index_container button.register span { font-size: 18px; font-weight: bold; position: absolute; bottom: 5px; right: 30px; }
 .not_logged_in_index_container a.login { position: absolute; color: #fff; font-family: Arial; font-size: 14px; bottom: 49px; right: 337px; }
 
+/* Files after login has been done. */
+.logged_in_index_container { position: relative; height: 452px; background-image: url('files_container.jpg'); }
 .logged_in_index_container span { color: #fff; }
-.logged_in_index_container .logged_in { margin-right: 72px; margin-top: 32px; }
-.logged_in_index_container .sign-out { margin-left: 20px; color: #fff; }
-.logged_in_index_container .sign-out:hover { color: #60607b; }
+.logged_in_index_container .logged_in { margin-right: 73px; margin-top: 29px; }
+.logged_in_index_container .sign-out { margin-left: 20px; color: #c3c6c7; font-size: 18px; }
+.logged_in_index_container .sign-out:hover { color: #898e90; }
 .logged_in_index_container .logged_in { float: right; }
+.logged_in_index_container .upload_form { position: absolute; bottom: 0px; left: 52px; }
+.logged_in_index_container .upload_form input[type=file] { color: #fff; }
+.logged_in_index_container .upload_form input[type=submit] { font-size: 14px; font-weight: bold; margin-left: 47px; }
 
 /* Register. */
 .register_container { position: relative; background-image: url('register_container.jpg'); height: 350px; }
@@ -44,6 +48,7 @@ body { margin: 0; background-color: #1a1a1a; }
 .login_container form .remember_me { color: #fff; }
 
 /* -- FOOTER --. */
+.how_it_works_container { position: relative; background-image: url('how_it_works.jpg'); height: 404px; }
 .footer { position: relative; background-image: url('footer_container.jpg'); height: 225px; }
 .footer a { position: absolute; color: #4d6f96; font-size: 24px; font-style: italic; font-family: Myriad Pro, Arial; bottom: 94px; right: 72px; }
 
@@ -63,6 +68,8 @@ a { text-decoration: none; }
 /* Style an input element in a fancy way. */
 input.border-style { border: 1px solid black; padding: 5px; padding-left: 10px; background: rgba(27,26,66,1); color: #fff; }
 input.shadow-style { -o-box-shadow: inset 0 0 3px #000; -moz-box-shadow: inset 0 0 3px #000; -webkit-box-shadow: inset 0 0 3px #000; box-shadow: inset 0 0 3px #000; }
+input.transparent-style { background: transparent; color: #c3c6c7; border: none; font-weight: bold; text-transform: uppercase; }
+input.transparent-style:hover { color: #898e90; }
 
 /* Placeholder coloring. */
 ::-webkit-input-placeholder { /* WebKit browsers */
