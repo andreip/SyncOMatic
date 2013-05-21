@@ -63,8 +63,10 @@ body { margin: 0; background-color: #1a1a1a; }
 
 /* -- FOOTER --. */
 .how_it_works_container { position: relative; background-image: url('how_it_works.jpg'); height: 404px; }
-.footer { position: relative; background-image: url('footer_container.jpg'); height: 225px; }
+.footer { position: relative; background-image: url('footer_container.jpg'); height: 226px; }
 .footer a { position: absolute; color: #4d6f96; font-size: 24px; font-style: italic; font-family: Myriad Pro, Arial; bottom: 94px; right: 72px; }
+/* Add email icon to anchor. */
+.footer a { display: inline-block; padding-left:35px; line-height:23px; background: transparent url('email_icon.gif') center left no-repeat; }
 
 /* -- MISC --. */
 
