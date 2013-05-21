@@ -42,7 +42,7 @@ body { margin: 0; background-color: #1a1a1a; }
 .logged_in_index_container tbody, .logged_in_index_container thead > tr { display: block; }
 .logged_in_index_container table td { width: 250px; font-size: 18px; color: #fff; }
 .logged_in_index_container table thead tr { height: 25px; }
-.logged_in_index_container table thead td { padding-left: 10px; }
+.logged_in_index_container table thead td { padding-left: 60px; }
 .logged_in_index_container table tr { height: 34px; }
 .logged_in_index_container table tr.dark { background-color: #1b1b3e; }
 .logged_in_index_container table tr.light { background-color: #35357a; }
