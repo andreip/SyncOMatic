@@ -16,13 +16,19 @@ body { margin: 0; background-color: #1a1a1a; }
 
 /* Index. */
 .not_logged_in_index_container { position: relative; background-image: url('index_container.jpg'); height: 350px; }
-.logged_in_index_container { height: 350px; }
+.logged_in_index_container { height: 452px; background-image: url('files_container.jpg'); }
 .how_it_works_container { position: relative; background-image: url('how_it_works.jpg'); height: 404px; }
 
 .not_logged_in_index_container a { color: #000; }
 .not_logged_in_index_container button.register { background-color: #f0c454; width: 102px; height: 38px; position: absolute; bottom: 41px; right: 429px; }
 .not_logged_in_index_container button.register span { font-size: 18px; font-weight: bold; position: absolute; bottom: 5px; right: 30px; }
 .not_logged_in_index_container a.login { position: absolute; color: #fff; font-family: Arial; font-size: 14px; bottom: 49px; right: 337px; }
+
+.logged_in_index_container span { color: #fff; }
+.logged_in_index_container .logged_in { margin-right: 72px; margin-top: 32px; }
+.logged_in_index_container .sign-out { margin-left: 20px; color: #fff; }
+.logged_in_index_container .sign-out:hover { color: #60607b; }
+.logged_in_index_container .logged_in { float: right; }
 
 /* Register. */
 .register_container { position: relative; background-image: url('register_container.jpg'); height: 350px; }

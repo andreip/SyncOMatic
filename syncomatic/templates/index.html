@@ -2,10 +2,10 @@
 {% block content %}
     {% if g.user.is_authenticated() %}
         <div class="logged_in_index_container group">
-            <span class="logged_in">Hi,
-                <a href='#'>{{user.email}}</a>
-                <a href="{{url_for('logout')}}">Logout</a>
-            </span>
+            <div class="logged_in">
+                <span>Hi, {{user.email}}</span>
+                <a class="sign-out" href="{{url_for('logout')}}">Sign out</a>
+            </div>
 
             {% if upload_message %}
                 <span>{{ upload_message }}<span>
