@@ -33,11 +33,13 @@ body { margin: 0; background-color: #1a1a1a; }
 .logged_in_index_container .upload_form { position: absolute; bottom: 0px; left: 52px; }
 .logged_in_index_container .upload_form input[type=file] { color: #fff; }
 .logged_in_index_container .upload_form input[type=submit] { font-size: 14px; font-weight: bold; margin-left: 47px; }
+/* Current path directory. */
+.logged_in_index_container .current_path { position: absolute; font-size: 30px; font-family: Verdana, Arial; color: #d1b875; top: 22px; left: 52px; }
 /* Files table. */
 .logged_in_index_container table { position: absolute; top: 90px; left: 51px; width: 906px; border-collapse:collapse; }
 .logged_in_index_container table tbody { height: 272px; overflow: auto; }
 .logged_in_index_container tbody, .logged_in_index_container thead > tr { display: block; }
-.logged_in_index_container table td { width: 250px; font-size: 18px; }
+.logged_in_index_container table td { width: 250px; font-size: 18px; color: #fff; }
 .logged_in_index_container table thead tr { height: 25px; }
 .logged_in_index_container table thead td { padding-left: 10px; }
 .logged_in_index_container table tr { height: 34px; }
