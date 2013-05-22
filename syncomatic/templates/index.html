@@ -14,7 +14,7 @@
             </form>
 
             <div class="bottom-buttons group">
-                <form class="upload_form" action="{{url_for('index')}}" method=post enctype=multipart/form-data>
+                <form class="upload_form" action="{{url_for('index', path=path)}}" method=post enctype=multipart/form-data>
                     {{form.hidden_tag()}}
                     <div class="upload_form_container">
                         {{form.upload(class="transparent-stype")}}

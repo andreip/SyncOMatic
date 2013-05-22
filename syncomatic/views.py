@@ -76,7 +76,7 @@ class RootView(RenderTemplateView):
         elif request.method == 'POST':
             if form.validate_on_submit():
                 form.save_file(current_path)
-                return redirect(url_for('index'))
+                return redirect(url_for('index', path=current_path))
             files = foos.get_filelist(current_path)
             # Re-render the index page with upload information regarding the
             # uploaded file through POST.
@@ -128,16 +128,17 @@ class deleteFileView(getFileView):
         not need a template associated with it.
     """
     def dispatch_request(self):
+        current_path = request.args.get('path')
         index = request.args.get('index')
         # Target the file one wants to delete
-        fullpath = self.get_filepath_by_index(request.args.get('path'), index)
+        fullpath = self.get_filepath_by_index(current_path, index)
         if os.path.exists(fullpath):
             if os.path.isfile(fullpath):
                 os.unlink(fullpath)
             else:
                 shutil.rmtree(fullpath)
         # Re-render root page (/)
-        return redirect(url_for('index'))
+        return redirect(url_for('index', path=current_path))
 
 
 class LoginView(RenderTemplateView):
