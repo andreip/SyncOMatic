@@ -58,7 +58,9 @@ class RootView(RenderTemplateView):
         path_message = '/'
         if request.args.get('path'):
             current_path = request.args.get('path')
-            path_message = current_path[len(base_path):]
+            # If current path is not '/' we update the location message
+            if not current_path == base_path:
+                path_message = current_path[len(base_path):]
         else:
             current_path = base_path
 
@@ -194,9 +196,10 @@ class CreateFolderView(View):
 
     @login_required
     def dispatch_request(self):
+        # url_for in template send extra argument current_path
+        current_path = request.args.get('path')
         form = CreateFolderForm(request.form)
         if form.validate_on_submit():
-            # FIXME / TODO: this is hardcoded to user home
-            # as the directory where to create the new directory.
-            form.create_directory(g.user.get_files_path())
-        return redirect(url_for('index'))
+            form.create_directory(current_path)
+        # We pass current_path further, we need to keep track of our position
+        return redirect(url_for('index', path=current_path))

@@ -8,7 +8,7 @@
             </div>
 
 
-            <form id="create_folder" method="post" action="{{url_for('create_folder')}}">
+            <form id="create_folder" method="post" action="{{url_for('create_folder', path=path)}}">
                 {{form.hidden_tag()}}
                 <input id="hidden_directory_name" type='hidden' name='directory' value="test_dir">
             </form>

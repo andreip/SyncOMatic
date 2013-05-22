@@ -59,7 +59,7 @@ class CreateFolderForm(Form):
     """
     directory = HiddenField("The new directory", validators=[Required()])
 
-    def create_directory(self, path):
-        new_dir = os.path.join(path, self.directory.data)
+    def create_directory(self, current_path):
+        new_dir = os.path.join(current_path, self.directory.data)
         if not os.path.exists(new_dir):
             os.makedirs(new_dir)
