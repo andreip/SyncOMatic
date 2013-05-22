@@ -203,3 +203,17 @@ class CreateFolderView(View):
             form.create_directory(current_path)
         # We pass current_path further, we need to keep track of our position
         return redirect(url_for('index', path=current_path))
+
+class ChangeFolderView(getFileView):
+    methods = ['GET']
+
+    @login_required
+    def dispatch_request(self):
+        # url_for in template send extra argument current_path
+        current_path = request.args.get('path')
+        index = request.args.get('index')
+        if index == str(-1):
+            new_path = os.path.dirname(current_path)
+        else:
+            new_path = self.get_filepath_by_index(current_path, index)
+        return redirect(url_for('index', path=new_path))

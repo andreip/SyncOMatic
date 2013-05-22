@@ -40,7 +40,7 @@
                 <tbody>
 					{% if not path_msg == "/" %}
                         <tr class="light">
-						<td class="folder_file">..</td>
+						<td class="folder_file"><a href="{{url_for('change_folder', path=path, index=-1)}}">..</a></td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -62,8 +62,7 @@
                         >
 						{% endif %}
                         {% if file.is_dir %}
-                            <td class="folder_file">{{file.name}}</td>
-                            <!-- TODO folder js -->
+                            <td class="folder_file"><a href="{{url_for('change_folder', path=path, index=files.index(file))}}">{{file.name}}</a></td>
                         {% else %}
                             <td class="regular_file">{{file.name}}</td>
                         {% endif %}

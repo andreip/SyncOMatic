@@ -20,3 +20,6 @@ app.add_url_rule('/register', view_func=views.RegisterView.as_view('register',\
 
 app.add_url_rule('/create_folder',
                  view_func=views.CreateFolderView.as_view('create_folder'))
+
+app.add_url_rule('/change_folder',
+                 view_func=views.ChangeFolderView.as_view('change_folder'))
