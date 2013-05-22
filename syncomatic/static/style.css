@@ -50,10 +50,13 @@ body { margin: 0; background-color: #1a1a1a; }
 .logged_in_index_container table tr.light { background-color: #35357a; }
 .logged_in_index_container table .buttons_container .button { float: left; }
 .logged_in_index_container table .buttons_container .button input[type=submit] { font-size: 14px; }
+.logged_in_index_container table .buttons_container .button input[type=button] { font-size: 14px; }
+.logged_in_index_container table .buttons_container { width: 300px; }
 .logged_in_index_container table tbody td.folder_file a { color: #eabc48; font-weight: bold; }
 /* Icons for download, delete, new folder. */
 .logged_in_index_container .button-download input[type=submit] { display: inline-block; padding-left:20px; line-height:16px; background: transparent url('download_icon.png') center left no-repeat; }
 .logged_in_index_container .button-delete input[type=submit] { display: inline-block; padding-left:20px; line-height:16px; background: transparent url('delete_icon.png') center left no-repeat; }
+.logged_in_index_container .button-share input[type=button] { display: inline-block; padding-left:20px; line-height:18px; background: transparent url('share_icon.png') center left no-repeat; }
 .logged_in_index_container #create_folder_button { display: inline-block; padding-left:15px; line-height:11px; background: transparent url('plus-icon.gif') center left no-repeat; padding-top: 4px; }
 /* Icon for folders, files. */
 .logged_in_index_container table tbody td.folder_file { display: inline-block; padding-left:20px; line-height:16px; background: transparent url('folder_icon.png') center left no-repeat; margin-top: 9px; margin-left: 10px; }

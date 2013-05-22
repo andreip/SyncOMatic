@@ -8,6 +8,7 @@
             </div>
 
 
+            <!-- hidden form for creating a folder. -->
             <form id="create_folder" method="post" action="{{url_for('create_folder', path=path)}}">
                 {{form.hidden_tag()}}
                 <input id="hidden_directory_name" type='hidden' name='directory' value="test_dir">
@@ -82,6 +83,16 @@
                                             <input type="hidden" name="path" value={{path}}>
                                             <input type="hidden" name="index" value={{files.index(file)}}>
                                             <input class="transparent-style" type=submit value=Delete>
+                                        </form>
+                                    </div>
+                                    <div class="button button-share group">
+                                        <input type='button' class="share_folder_button transparent-style" onclick="share_folder()" value="Share">
+                                        <!-- hidden form for sharing a folder. -->
+                                        <form class="share_folder_form" method="post" action="{{url_for('share_file')}}">
+                                            {{form.hidden_tag()}}
+                                            <input type="hidden" name="path" value={{path}}>
+                                            <input type="hidden" name="index" value={{files.index(file)}}>
+                                            <input type="hidden" name="email" value>
                                         </form>
                                     </div>
                                 </div>

@@ -1,4 +1,5 @@
 import os
+import shutil, errno
 
 from flask.ext.wtf import Form, BooleanField, PasswordField, Required
 from flask.ext.wtf.html5 import EmailField
@@ -63,3 +64,33 @@ class CreateFolderForm(Form):
         new_dir = os.path.join(current_path, self.directory.data)
         if not os.path.exists(new_dir):
             os.makedirs(new_dir)
+
+def copyanything(src, dst):
+    try:
+        shutil.copytree(src, dst)
+    except OSError as exc: # python >2.5
+        if exc.errno == errno.ENOTDIR:
+            shutil.copy(src, dst)
+        else: raise
+
+class ShareFileForm(Form):
+    """Form used for sharing files. This form
+       is intended only for validation purposes.
+    """
+    path = HiddenField("The share email", validators=[Required()])
+    index = HiddenField("The share email", validators=[Required()])
+    email = HiddenField("The share email", validators=[Required()])
+
+
+    def share_directory(self):
+        from nose.tools import set_trace; set_trace()
+        share_user = User.query.filter_by(email = self.email.data).first()
+        if not share_user:
+            return
+
+        # TODO the source to share.
+        to_share = ''
+        # Get home path for the user to share folder with.
+        dest = share_user.get_files_path()
+        # TODO: uncomment this
+        #copyanything(to_share, dest)

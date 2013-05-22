@@ -17,3 +17,20 @@ function create_folder() {
         }
     });
 }
+
+function share_folder() {
+    /* This is how to wait for jQuery to load. */
+    $(document).ready(function() {
+        /* get the element which we want to share, that was clicked on. */
+        $clicked = $(event.currentTarget);
+        /* get form object from DOM using jQuery, search by id. */
+        form = $clicked.siblings('form');
+        /* get a email with whom to share the file/folder. */
+        var share_email = prompt("New directory name", "");
+        if (share_email && form) {
+            /* set the email introduced by the user. */
+            form.find("input[name='email']").val(share_email);
+            form.submit();
+        }
+    });
+}
