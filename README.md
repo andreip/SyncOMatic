@@ -17,6 +17,10 @@ SyncOMatic
 
 * upload a file using the file chooser, and store it in **project/files/**
 * download a file (to local) that was uploaded
+* download a folder by archive, it zips the folder content
+* create folders
+* access folders and their parent-folder
+* delete files and folders
 * login and logout with a user in the app, it doesn't take into account the password for now and
   no registrations possible for now, just hardcoded account created in the database
   * database is in `syncomatic/static/syncomatic.db`
