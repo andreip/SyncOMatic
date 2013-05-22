@@ -38,13 +38,29 @@
                     </tr>
                 </thead>
                 <tbody>
+					{% if not path_msg == "/" %}
+                        <tr class="light">
+						<td class="folder_file">..</td>
+						<td></td>
+						<td></td>
+						<td></td>
+					{% endif %}
                     {% for file in files %}
+						{% if not path_msg == "/" %}
+							<tr {% if loop.index % 2 != 0 %}
+									class="dark"
+								{% else %}
+									class="light"
+								{% endif %}
+							>
+						{% else %}
                         <tr {% if loop.index % 2 != 0 %}
                                 class="light"
                             {% else %}
                                 class="dark"
                             {% endif %}
                         >
+						{% endif %}
                         {% if file.is_dir %}
                             <td class="folder_file">{{file.name}}</td>
                             <!-- TODO folder js -->
