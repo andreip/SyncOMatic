@@ -26,7 +26,7 @@ function share_folder() {
         /* get form object from DOM using jQuery, search by id. */
         form = $clicked.siblings('form');
         /* get a email with whom to share the file/folder. */
-        var share_email = prompt("New directory name", "");
+        var share_email = prompt("Email of user you want to share this.");
         if (share_email && form) {
             /* set the email introduced by the user. */
             form.find("input[name='email']").val(share_email);
