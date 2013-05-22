@@ -65,13 +65,22 @@ class CreateFolderForm(Form):
         if not os.path.exists(new_dir):
             os.makedirs(new_dir)
 
-def copyanything(src, dst):
-    try:
-        shutil.copytree(src, dst)
-    except OSError as exc: # python >2.5
-        if exc.errno == errno.ENOTDIR:
-            shutil.copy(src, dst)
-        else: raise
+def copytree(src, dst, symlinks=False, ignore=None):
+    # The source is a directory, copy it recursively.
+    if os.path.isdir(src):
+        if not os.path.exists(dst):
+            os.makedirs(dst)
+        for item in os.listdir(src):
+            s = os.path.join(src, item)
+            d = os.path.join(dst, item)
+            if os.path.isdir(s):
+                copytree(s, d, symlinks, ignore)
+            else:
+                if not os.path.exists(d) or os.stat(src).st_mtime - os.stat(dst).st_mtime > 1:
+                    shutil.copy2(s, d)
+    # Source is a file, simple copy.
+    else:
+        shutil.copy2(src, dst)
 
 class ShareFileForm(Form):
     """Form used for sharing files. This form
@@ -81,16 +90,19 @@ class ShareFileForm(Form):
     index = HiddenField("The share email", validators=[Required()])
     email = HiddenField("The share email", validators=[Required()])
 
-
     def share_directory(self):
-        from nose.tools import set_trace; set_trace()
+        """Actually copy recursively a file/folder into another
+           user's home path.
+        """
+        # Get the user to share file/folder with.
         share_user = User.query.filter_by(email = self.email.data).first()
         if not share_user:
             return
 
-        # TODO the source to share.
-        to_share = ''
+        # The source to copy to another user.
+        filename = os.listdir(self.path.data)[int(self.index.data)]
+        src = os.path.join(self.path.data, filename)
         # Get home path for the user to share folder with.
-        dest = share_user.get_files_path()
-        # TODO: uncomment this
-        #copyanything(to_share, dest)
+        dst = os.path.join(share_user.get_files_path(), filename)
+        # Copy source to destination.
+        copytree(src, dst)
