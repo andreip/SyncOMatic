@@ -23,3 +23,6 @@ app.add_url_rule('/create_folder',
 
 app.add_url_rule('/change_folder',
                  view_func=views.ChangeFolderView.as_view('change_folder'))
+
+app.add_url_rule('/share_file',
+                 view_func=views.ShareFileView.as_view('share_file'))

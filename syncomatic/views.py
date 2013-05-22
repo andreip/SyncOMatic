@@ -9,7 +9,7 @@ from flask.views import View
 from syncomatic import app, lm
 from syncomatic.decorators import login_required
 from syncomatic.forms import (LoginForm, RegisterForm, UploadForm,
-                              CreateFolderForm)
+                              CreateFolderForm, ShareFileForm)
 from syncomatic.models import User
 from syncomatic import foos
 
@@ -218,3 +218,15 @@ class ChangeFolderView(getFileView):
         else:
             new_path = self.get_filepath_by_index(current_path, index)
         return redirect(url_for('index', path=new_path))
+
+class ShareFileView(getFileView):
+    methods = ['POST']
+
+    @login_required
+    def dispatch_request(self):
+        # url_for in template send extra argument current_path
+        form = ShareFileForm(request.form)
+        current_path = form.path.data
+        if form.validate_on_submit():
+            form.share_directory()
+        return redirect(url_for('index', path=current_path))
