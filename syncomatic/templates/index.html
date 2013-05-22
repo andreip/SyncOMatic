@@ -38,29 +38,29 @@
                     </tr>
                 </thead>
                 <tbody>
-					{% if not path_msg == "/" %}
+                    {% if not path_msg == "/" %}
                         <tr class="light">
-						<td class="folder_file"><a href="{{url_for('change_folder', path=path, index=-1)}}">..</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					{% endif %}
+                        <td class="folder_file"><a href="{{url_for('change_folder', path=path, index=-1)}}">..</a></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    {% endif %}
                     {% for file in files %}
-						{% if not path_msg == "/" %}
-							<tr {% if loop.index % 2 != 0 %}
-									class="dark"
-								{% else %}
-									class="light"
-								{% endif %}
-							>
-						{% else %}
-                        <tr {% if loop.index % 2 != 0 %}
-                                class="light"
+                        {% if not path_msg == "/" %}
+                            <tr {% if loop.index % 2 != 0 %}
+                            class="dark"
                             {% else %}
-                                class="dark"
+                            class="light"
                             {% endif %}
-                        >
-						{% endif %}
+                            >
+                        {% else %}
+                            <tr {% if loop.index % 2 != 0 %}
+                                    class="light"
+                                {% else %}
+                                    class="dark"
+                                {% endif %}
+                            >
+                        {% endif %}
                         {% if file.is_dir %}
                             <td class="folder_file"><a href="{{url_for('change_folder', path=path, index=files.index(file))}}">{{file.name}}</a></td>
                         {% else %}
